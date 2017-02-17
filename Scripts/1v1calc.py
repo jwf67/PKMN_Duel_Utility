@@ -142,26 +142,71 @@ def percentOccurance(moveA, moveB):
 	print Decimal(moveA.size)/Decimal(DISK_SIZE)*Decimal(moveB.size)/Decimal(DISK_SIZE)*100
 	return Decimal(moveA.size)/Decimal(DISK_SIZE)*Decimal(moveB.size)/Decimal(DISK_SIZE)*100
 
-pm = []
-tackle = Move("tackle", 40, "white", 0, 32)
-thunder = Move("thunder", 100, "yellow", 0, 48)
-tailwhip = Move("tailwhip", 0, "purple", 2, 16)
 
-pm.append(tackle)
-pm.append(thunder)
-pm.append(tailwhip)
+def receivePokemon():
+	F = []
+	movesA = []
+	movesB = []
+	move_count = 1
+	
+	
+	for figureNum in range(1, 3):
+		move_count = input("How many moves does the pokemon #%d have?: " % (figureNum))
+		for moveNum in range(1, move_count+1):
+			move_name = raw_input("Enter move number %d's name for figure %d: " % (moveNum, figureNum))
+			move_power = input("Enter the move's power: " )
+			move_type = raw_input("Enter the move's type: ")
+			move_stars = input("Enter the move's stars: ")
+			move_size = input("Enter the move's size: ")
+			
+			if figureNum == 1:
+				movesA.append(Move(move_name, move_power, move_type, move_stars, move_size))
+			else:
+				movesB.append(Move(move_name, move_power, move_type, move_stars, move_size))
+		
+		if checkIfSizeAccounted(movesA):
+			if figureNum == 1:
+				F.append(Figure(movesA, "healthy"))
+			else:
+				F.append(Figure(movesB, "healthy"))
+			
+	compareFigures(F[0], F[1])
 
-Pikachu = Figure(pm, "healthy")
+def checkIfSizeAccounted(moves):
+	total_size = 0
+	for move in moves:
+		total_size += move.size
+	
+	if total_size != DISK_SIZE:
+		print "Invalid Size! Check all size values!"
+		return False
+	else:
+		return True
+def hugeTest():	
+	#Testing
+	pm = []
+	tackle = Move("tackle", 40, "white", 0, 32)
+	thunder = Move("thunder", 100, "yellow", 0, 48)
+	tailwhip = Move("tailwhip", 0, "purple", 2, 16)
 
-cm = []
-scratch = Move("scratch", 20, "white", 0, 12)
-flamethrower = Move("flamethrower", 120, "white", 0, 64)
-miss = Move("miss", -1, "white", 0, 20)
+	pm.append(tackle)
+	pm.append(thunder)
+	pm.append(tailwhip)
 
-cm.append(scratch)
-cm.append(flamethrower)
-cm.append(miss)
+	Pikachu = Figure(pm, "healthy")
 
-Charmander = Figure(cm, "healthy")
+	cm = []
+	scratch = Move("scratch", 20, "white", 0, 12)
+	flamethrower = Move("flamethrower", 120, "white", 0, 64)
+	miss = Move("miss", -1, "white", 0, 20)
 
-compareFigures(Pikachu, Charmander)
+	cm.append(scratch)
+	cm.append(flamethrower)
+	cm.append(miss)
+
+	Charmander = Figure(cm, "healthy")
+
+	compareFigures(Pikachu, Charmander)
+	
+hugeTest()
+receivePokemon()
