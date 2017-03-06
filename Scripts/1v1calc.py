@@ -116,6 +116,7 @@ def compareBlue(moveA, moveB):
 	#For most purposes, blue just makes the battle neutral
 	return 0
 
+#Calculates the chance of both pokemon winning and drawing
 def compareFigures(f1, f2):
 	chanceOfF1Win = 0
 	chanceOfF2Win = 0
@@ -136,20 +137,21 @@ def compareFigures(f1, f2):
 	print "%f" % (chanceOfF2Win)
 	print "%f" % (chanceOfDraw)
 
+# Calculate the percent chance a move combination occurs when the two pokemon battle
 def percentOccurance(moveA, moveB):
 	print moveA.size
 	print moveB.size
 	print Decimal(moveA.size)/Decimal(DISK_SIZE)*Decimal(moveB.size)/Decimal(DISK_SIZE)*100
 	return Decimal(moveA.size)/Decimal(DISK_SIZE)*Decimal(moveB.size)/Decimal(DISK_SIZE)*100
 
-
+#Called to start the program, prompts the user to give information about the two combating pokemon
 def receivePokemon():
 	F = []
 	movesA = []
 	movesB = []
 	move_count = 1
 	
-	
+	#Look at 2 pokemon and receive all of their characteristics
 	for figureNum in range(1, 3):
 		move_count = input("How many moves does the pokemon #%d have?: " % (figureNum))
 		for moveNum in range(1, move_count+1):
@@ -172,6 +174,7 @@ def receivePokemon():
 			
 	compareFigures(F[0], F[1])
 
+#Check to make sure the person entered a total valid amount of moves
 def checkIfSizeAccounted(moves):
 	total_size = 0
 	for move in moves:
@@ -182,7 +185,9 @@ def checkIfSizeAccounted(moves):
 		return False
 	else:
 		return True
-def hugeTest():	
+	
+#Add More Tests
+def test():	
 	#Testing
 	pm = []
 	tackle = Move("tackle", 40, "white", 0, 32)
